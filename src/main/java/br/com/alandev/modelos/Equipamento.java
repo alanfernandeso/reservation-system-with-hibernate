@@ -13,6 +13,9 @@ public class Equipamento {
     private String descricao;
     private int quantidade;
 
+    public Equipamento() {
+    }
+
     public Equipamento(long id, String nome, String descricao, int quantidade) {
         this.id = id;
         this.nome = nome;

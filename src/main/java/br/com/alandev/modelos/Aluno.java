@@ -7,13 +7,15 @@ import javax.persistence.*;
 public class Aluno {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long matricula;
     private String nome;
     private String email;
 
-    public Aluno(long matricula, String nome, String email) {
-        this.matricula = matricula;
+    public Aluno() {
+    }
+
+    public Aluno(String nome, String email) {
         this.nome = nome;
         this.email = email;
     }

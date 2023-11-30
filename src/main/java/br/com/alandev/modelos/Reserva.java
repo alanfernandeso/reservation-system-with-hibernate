@@ -1,6 +1,7 @@
 package br.com.alandev.modelos;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -10,15 +11,24 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne
     private Aluno aluno;
+    @ManyToOne
     private Espaco espaco;
+    @ManyToOne
     private Equipamento equipamento;
 
-    @Column(name = "data_hora_agendamento")
-    private Date dataHoraDoAgendamento;
+    @Column(name = "agendamento")
+    private LocalDateTime dataHoraDoAgendamento;
+
+    @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
-    public Reserva(long id, Aluno aluno, Espaco espaco, Equipamento equipamento, Date dataHoraDoAgendamento, ReservationStatus status) {
+    public Reserva() {
+    }
+
+    public Reserva(long id, Aluno aluno, Espaco espaco, Equipamento equipamento, LocalDateTime dataHoraDoAgendamento, ReservationStatus status) {
         this.id = id;
         this.aluno = aluno;
         this.espaco = espaco;
@@ -51,11 +61,11 @@ public class Reserva {
         this.equipamento = equipamento;
     }
 
-    public Date getDataHoraDoAgendamento() {
+    public LocalDateTime getDataHoraDoAgendamento() {
         return dataHoraDoAgendamento;
     }
 
-    public void setDataHoraDoAgendamento(Date dataHoraDoAgendamento) {
+    public void setDataHoraDoAgendamento(LocalDateTime dataHoraDoAgendamento) {
         this.dataHoraDoAgendamento = dataHoraDoAgendamento;
     }
 

@@ -12,6 +12,9 @@ public class Espaco {
     private String nome;
     private String local;
 
+    public Espaco() {
+    }
+
     public Espaco(long id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
