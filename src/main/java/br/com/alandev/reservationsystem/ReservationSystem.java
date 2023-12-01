@@ -30,13 +30,25 @@ public class ReservationSystem {
                 case 1:
 
                     EntityManager em = JPAUtil.getEntityManager();
-                    Aluno aluno = new Aluno("João", "joao@colegiond.com.br");
+
+                    System.out.println("Digite o nome");
+                    String nome = new Scanner(System.in).nextLine();
+                    System.out.println("Digite o email");
+                    String email = new Scanner(System.in).nextLine();
+
+                    Aluno aluno = new Aluno(nome, email);
                     AlunoDao dao = new AlunoDao(em);
+
                     em.getTransaction().begin();
                     dao.cadastrar(aluno);
                     em.getTransaction().commit();
                     em.close();
-                    System.out.println("Alunos cadastrado!");
+
+                case 6:
+
+                    EntityManager em = JPAUtil.getEntityManager();
+
+
             }
 
 
