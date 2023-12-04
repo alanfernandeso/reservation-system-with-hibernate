@@ -28,8 +28,7 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(long id, Aluno aluno, Espaco espaco, Equipamento equipamento, LocalDateTime dataHoraDoAgendamento, ReservationStatus status) {
-        this.id = id;
+    public Reserva(Aluno aluno, Espaco espaco, Equipamento equipamento, LocalDateTime dataHoraDoAgendamento, ReservationStatus status) {
         this.aluno = aluno;
         this.espaco = espaco;
         this.equipamento = equipamento;

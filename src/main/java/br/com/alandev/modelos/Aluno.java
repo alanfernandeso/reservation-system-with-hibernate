@@ -15,6 +15,10 @@ public class Aluno {
     public Aluno() {
     }
 
+    public Aluno(long matricula) {
+        this.matricula = matricula;
+    }
+
     public Aluno(String nome, String email) {
         this.nome = nome;
         this.email = email;
@@ -34,5 +38,13 @@ public class Aluno {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public long getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(long matricula) {
+        this.matricula = matricula;
     }
 }

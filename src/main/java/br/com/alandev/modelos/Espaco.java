@@ -10,15 +10,28 @@ public class Espaco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
+    @Column(name = "localizacao")
     private String local;
 
     public Espaco() {
+    }
+
+    public Espaco(long id) {
+        this.id = id;
     }
 
     public Espaco(long id, String nome, String descricao) {
         this.id = id;
         this.nome = nome;
         this.local = descricao;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -35,5 +48,14 @@ public class Espaco {
 
     public void setLocal(String local) {
         this.local = local;
+    }
+
+    @Override
+    public String toString() {
+        return "Espaco{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", local='" + local + '\'' +
+                '}';
     }
 }

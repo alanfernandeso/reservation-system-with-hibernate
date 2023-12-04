@@ -16,6 +16,10 @@ public class Equipamento {
     public Equipamento() {
     }
 
+    public Equipamento(long id) {
+        this.id = id;
+    }
+
     public Equipamento(long id, String nome, String descricao, int quantidade) {
         this.id = id;
         this.nome = nome;
@@ -45,5 +49,13 @@ public class Equipamento {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
