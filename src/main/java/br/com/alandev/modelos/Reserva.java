@@ -3,6 +3,7 @@ package br.com.alandev.modelos;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "reservas")
@@ -74,5 +75,17 @@ public class Reserva {
 
     public void setStatus(ReservationStatus status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id=" + id +
+                ", aluno=" + aluno +
+                ", espaco=" + espaco +
+                ", equipamento=" + equipamento +
+                ", dataHoraDoAgendamento=" + dataHoraDoAgendamento +
+                ", status=" + status +
+                '}';
     }
 }

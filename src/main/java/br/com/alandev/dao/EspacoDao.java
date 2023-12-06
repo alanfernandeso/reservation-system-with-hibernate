@@ -17,8 +17,5 @@ public class EspacoDao {
         return em.find(Espaco.class, id);
     }
 
-    public List<Espaco> buscarTodos(){
-        String jpql = "SELECT e FROM Espaco e";
-        return em.createQuery(jpql, Espaco.class).getResultList();
-    }
+
 }

@@ -7,10 +7,8 @@ import br.com.alandev.modelos.*;
 import br.com.alandev.util.JPAUtil;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -24,40 +22,73 @@ public class ReservationSystem {
 
             System.out.println("===========================");
             System.out.println("1. Cadastrar aluno");
-            System.out.println("2. Alterar cadastro do aluno");
-            System.out.println("3. Reservar espaço");
-            System.out.println("4. Consultar reserva");
-            System.out.println("5. Cancelar reserva");
-            System.out.println("6. Listar espaços");
-            System.out.println("7. Confirmar reserva");
-            System.out.println("8. Sair");
+            System.out.println("2. Reservar espaço");
+            System.out.println("3. Consultar reserva");
+            System.out.println("4. Listar reservas");
+            System.out.println("5. Confirmar reserva");
+            System.out.println("6. Sair");
             int opcao = new Scanner(System.in).nextInt();
 
             switch (opcao){
                 case 1:
                     cadastrarAluno();
                     break;
-                case 3:
+                case 2:
                     reservar();
                     break;
-                case 6:
-                    buscarTodosOsEspacos();
+                case 3:
+                    consultarReserva();
                     break;
-
+                case 4:
+                    buscarTodasAsReservas();
+                    break;
+                case 5:
+                    confirmarReserva();
+                    break;
+                case 6:
+                    menu = false;
+                    break;
             }
-
 
         }
 
     }
 
-    private static void buscarTodosOsEspacos() {
+    private static void confirmarReserva(){
         EntityManager em = JPAUtil.getEntityManager();
-        EspacoDao dao = new EspacoDao(em);
-        List<Espaco> espacos = dao.buscarTodos();
+        ReservaDao dao = new ReservaDao(em);
+        System.out.println("Digite o ID da reserva");
+        long id = new Scanner(System.in).nextInt();
+        Reserva reserva = dao.consultarReserva(id);
+
+        reserva.setStatus(ReservationStatus.CONFIRMADO);
+
+        em.getTransaction().begin();
+        em.persist(reserva);
+        em.getTransaction().commit();
+        em.close();
+
+        System.out.println("=================================");
+        System.out.println("Reserva confirmada!");
+    }
+
+    private static void consultarReserva(){
+        EntityManager em = JPAUtil.getEntityManager();
+        ReservaDao dao = new ReservaDao(em);
+        System.out.println("Digite o ID da reserva");
+        long id = new Scanner(System.in).nextInt();
+        Reserva reserva = dao.consultarReserva(id);
+        System.out.println("=================================");
+        System.out.println(reserva);
+    }
+
+    private static void buscarTodasAsReservas() {
+        EntityManager em = JPAUtil.getEntityManager();
+        ReservaDao dao = new ReservaDao(em);
+        List<Reserva> reservas = dao.buscarTodas();
         //System.out.println(espacos);
         System.out.println("=================================");
-        espacos.forEach(e -> System.out.println(e.toString()));
+        reservas.forEach(e -> System.out.println(e.toString()));
     }
 
     private static void cadastrarAluno(){
@@ -82,7 +113,7 @@ public class ReservationSystem {
 
         System.out.println("Digite a matrícula do aluno");
         Long matricula = new Scanner(System.in).nextLong();
-        System.out.println("Digite o nome espaço");
+        System.out.println("Digite o ID do espaço");
         Long espacoId = new Scanner(System.in).nextLong();
         System.out.println("Digite o ID do equipamento");
         Long equipamentoId = new Scanner(System.in).nextLong();
@@ -106,8 +137,6 @@ public class ReservationSystem {
             em.getTransaction().commit();
             em.close();
             System.out.println("Reserva cadastrada!");
-
-
 
     }
 
